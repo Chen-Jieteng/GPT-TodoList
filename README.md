@@ -6,6 +6,9 @@ GPT-TodoList is a web application that combines a TodoList and daily scheduler w
 - [English](./README.md)
 - [日本語](./jp/README.md)
 
+## Updates: 
+- Planning to complete the project before 2023/4/30
+
 ## Features
 
 - Left side: TodoList and daily scheduler
