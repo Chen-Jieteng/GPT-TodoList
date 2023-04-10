@@ -2,6 +2,7 @@
 import { inject } from "vue";
 import dayjs from 'dayjs';
 
+
 const tasks = inject("tasks");
 const completedTasks = inject("completedTasks");
 
@@ -15,25 +16,38 @@ const completeTask = (index) => {
 };
 
 function getCurrentDateTime() {
-  return dayjs().format('YYYY-MM-DD HH:mm:ss');
+  return dayjs().format('HH:mm A');
 }
+
+function getEndingTime(startingTime, duration) {
+  return dayjs(startingTime).add(duration, 'minute').format('hh:mm A');
+}
+
+function formatDuration(duration) {
+  return `${duration}min`;
+}
+
 </script>
 
 <template>
-  <div class="daily-schedule">
-    <strong>今日规划</strong>
-    <ul>
-      <li v-for="(task, index) in tasks" :key="index" class="task">
-        <div class="task-content">{{ task }} <span class="task-time">{{ getCurrentDateTime() }}</span></div>
-        <button class="complete-btn" @click="completeTask(index)">Complete</button>
-        <button class="delete-btn" @click="deleteTask(index)">删除</button>
-      </li>
-    </ul>
-  </div>
-</template>
+    <div class="daily-schedule">
+      <strong>今日规划</strong>
+      <ul>
+        <li v-for="(task, index) in tasks" :key="index" class="task">
+          <div class="task-content">
+            {{ task.content }}
+            <span class="task-duration">{{ formatDuration(task.duration) }}</span>
+            <span class="task-time">开始: {{ getCurrentDateTime() }} - 结束: {{ getEndingTime(getCurrentDateTime(), task.duration) }}</span>
+          </div>
+          <button class="complete-btn" @click="completeTask(index)">已完成</button>
+          <button class="delete-btn" @click="deleteTask(index)">删除</button>
+        </li>
+      </ul>
+    </div>
+  </template>
+  
 
 <style scoped>
-
 .task {
   position: relative;
   background-color: #ffffff;
