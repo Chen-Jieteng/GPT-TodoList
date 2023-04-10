@@ -30,23 +30,49 @@ const completeTask = (index) => {
 <style scoped>
 .task {
   position: relative;
+  background-color: #ffffff;
+  padding: 10px 15px;
+  margin-bottom: 10px;
+  border-radius: 5px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
 
+.task:hover {
+  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
+}
+
+.task-content {
+  display: inline-block;
+  margin-right: 10px;
+}
 
 .complete-btn,
 .delete-btn {
   position: absolute;
   right: 0;
   display: none;
+  background-color: transparent;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 5px 10px;
+  transition: background-color 0.3s ease;
 }
 
 .complete-btn {
   right: 60px;
+  color: #4caf50; /* Green */
 }
 
 .delete-btn {
-  position: absolute;
-  right: 0;
-  display: none;
+  color: #f44336; /* Red */
+}
+
+.complete-btn:hover,
+.delete-btn:hover {
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 .task:hover .complete-btn,
