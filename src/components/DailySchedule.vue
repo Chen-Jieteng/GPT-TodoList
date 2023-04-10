@@ -1,11 +1,17 @@
 <script setup lang="ts">
 import { inject } from "vue";
+const completedTasks = inject("completedTasks");
 
 const tasks = inject("tasks");
 
 const deleteTask = (index) => {
   tasks.value.splice(index, 1);
 }
+
+const completeTask = (index) => {
+  completedTasks.value.push(tasks.value[index]);
+  tasks.value.splice(index, 1);
+};
 </script>
 
 <template>
@@ -14,7 +20,8 @@ const deleteTask = (index) => {
     <ul>
       <li v-for="(task, index) in tasks" :key="index" class="task">
         {{ task }}
-        <button class="delete-btn" @click="deleteTask(index)">Delete</button>
+        <button class="complete-btn" @click="completeTask(index)">Complete</button>
+        <button class="delete-btn" @click="deleteTask(index)">删除</button>
       </li>
     </ul>
   </div>
@@ -23,6 +30,17 @@ const deleteTask = (index) => {
 <style scoped>
 .task {
   position: relative;
+
+
+.complete-btn,
+.delete-btn {
+  position: absolute;
+  right: 0;
+  display: none;
+}
+
+.complete-btn {
+  right: 60px;
 }
 
 .delete-btn {
@@ -31,6 +49,7 @@ const deleteTask = (index) => {
   display: none;
 }
 
+.task:hover .complete-btn,
 .task:hover .delete-btn {
   display: inline;
 }
