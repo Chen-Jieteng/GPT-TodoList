@@ -14,7 +14,10 @@ import DailyRevoke from "./DailyRevoke.vue";
 import DailyImprovement from "./DailyImprovement.vue";
 
 const tasks = ref([]);
+const completedTasks = ref([]);
+
 provide("tasks", tasks);
+provide("completedTasks", completedTasks);
 
 </script>
 
