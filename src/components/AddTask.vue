@@ -14,8 +14,8 @@ const addTask = () => {
 
 <template>
   <div class="add-task">
-    <input id="task-input" type="text" placeholder="Add new task" />
-    <button @click="addTask">Add Task</button>
+    <input id="task-input" type="text" placeholder="添加新任务" />
+    <button @click="addTask">添加</button>
   </div>
 </template>
 
