@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import { inject } from "vue";
-const completedTasks = inject("completedTasks");
+import dayjs from 'dayjs';
 
 const tasks = inject("tasks");
+const completedTasks = inject("completedTasks");
 
-const deleteTask = (index) => {
+function deleteTask(index) {
   tasks.value.splice(index, 1);
 }
 
@@ -12,6 +13,10 @@ const completeTask = (index) => {
   completedTasks.value.push(tasks.value[index]);
   tasks.value.splice(index, 1);
 };
+
+function getCurrentDateTime() {
+  return dayjs().format('YYYY-MM-DD HH:mm:ss');
+}
 </script>
 
 <template>
@@ -19,7 +24,7 @@ const completeTask = (index) => {
     <strong>今日规划</strong>
     <ul>
       <li v-for="(task, index) in tasks" :key="index" class="task">
-        {{ task }}
+        <div class="task-content">{{ task }} <span class="task-time">{{ getCurrentDateTime() }}</span></div>
         <button class="complete-btn" @click="completeTask(index)">Complete</button>
         <button class="delete-btn" @click="deleteTask(index)">删除</button>
       </li>
@@ -28,6 +33,7 @@ const completeTask = (index) => {
 </template>
 
 <style scoped>
+
 .task {
   position: relative;
   background-color: #ffffff;
@@ -47,6 +53,12 @@ const completeTask = (index) => {
   margin-right: 10px;
 }
 
+.task-time {
+  font-size: 12px;
+  color: #888;
+  margin-left: 5px;
+}
+
 .complete-btn,
 .delete-btn {
   position: absolute;
@@ -57,17 +69,18 @@ const completeTask = (index) => {
   outline: none;
   cursor: pointer;
   font-size: 14px;
-  padding: 5px 10px;
+  padding: 2px 10px;
   transition: background-color 0.3s ease;
+  margin-right:3%;
 }
 
 .complete-btn {
   right: 60px;
-  color: #4caf50; /* Green */
+  color:mediumaquamarine;
 }
 
 .delete-btn {
-  color: #f44336; /* Red */
+  color:firebrick;
 }
 
 .complete-btn:hover,
