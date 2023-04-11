@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import { ref, provide } from "vue";
+import { ref } from "vue";
 
 import Day from "./Day.vue";
 import AddTask from "./AddTask.vue";
@@ -16,22 +16,18 @@ import DailyImprovement from "./DailyImprovement.vue";
 const tasks = ref([]);
 const completedTasks = ref([]);
 
-provide("tasks", tasks);
-provide("completedTasks", completedTasks);
-
 </script>
 
 <template>
   <div class="todo-container">
     <div class="layer layer-1">
-      <Day />
-      <AddTask />
+      <Day /><AddTask :tasks="tasks"/>
     </div>
     <div class="layer layer-2">
-      <DailySchedule />
+      <DailySchedule :tasks="tasks" :completedTasks="completedTasks" />
     </div>
     <div class="layer layer-3">
-      <CompletedTaskList />
+      <CompletedTaskList :completedTasks="completedTasks" />
       <IncompletedTaskList />
       <ReasonIncomplete />
     </div>
