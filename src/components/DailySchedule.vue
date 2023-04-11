@@ -1,109 +1,57 @@
 <script setup lang="ts">
-import { inject } from "vue";
-import dayjs from 'dayjs';
+import { ref } from "vue";
 
+import Day from "./Day.vue";
+import AddTask from "./AddTask.vue";
+import DailySchedule from "./DailySchedule.vue";
+import CompletedTaskList from "./CompletedTaskList.vue";
+import IncompletedTaskList from "./IncompletedTaskList.vue";
+import ReasonIncomplete from "./ReasonIncomplete.vue";
+import DailyResult from "./DailyResult.vue";
+import DailyThought from "./DailyThought.vue";
+import DailyRevoke from "./DailyRevoke.vue";
+import DailyImprovement from "./DailyImprovement.vue";
 
-const tasks = inject("tasks");
-const completedTasks = inject("completedTasks");
-
-function deleteTask(index) {
-  tasks.value.splice(index, 1);
-}
-
-const completeTask = (index) => {
-  completedTasks.value.push(tasks.value[index]);
-  tasks.value.splice(index, 1);
-};
-
-function getCurrentDateTime() {
-  return dayjs().format('HH:mm A');
-}
-
-function getEndingTime(startingTime, duration) {
-  return dayjs(startingTime).add(duration, 'minute').format('hh:mm A');
-}
-
-function formatDuration(duration) {
-  return `${duration}min`;
-}
-
+const tasks = ref([]);
+const completedTasks = ref([]);
 </script>
 
 <template>
-    <div class="daily-schedule">
-      <strong>今日规划</strong>
-      <ul>
-        <li v-for="(task, index) in tasks" :key="index" class="task">
-          <div class="task-content">
-            {{ task.content }}
-            <span class="task-duration">{{ formatDuration(task.duration) }}</span>
-            <span class="task-time">开始: {{ getCurrentDateTime() }} - 结束: {{ getEndingTime(getCurrentDateTime(), task.duration) }}</span>
-          </div>
-          <button class="complete-btn" @click="completeTask(index)">已完成</button>
-          <button class="delete-btn" @click="deleteTask(index)">删除</button>
-        </li>
-      </ul>
+  <div class="todo-container">
+    <div class="layer layer-1">
+      <Day /><AddTask :tasks="tasks"/>
     </div>
-  </template>
-  
+    <div class="layer layer-2">
+      <DailySchedule :tasks="tasks" :completedTasks="completedTasks" />
+    </div>
+    <div class="layer layer-3">
+      <CompletedTaskList :completedTasks="completedTasks" />
+      <IncompletedTaskList />
+      <ReasonIncomplete />
+    </div>
+    <div class="layer layer-4">
+      <DailyResult />
+      <DailyThought />
+      <DailyRevoke />
+    </div>
+    <div class="layer layer-5">
+      <DailyImprovement />
+    </div>
+  </div>
+</template>
 
 <style scoped>
-.task {
-  position: relative;
-  background-color: #ffffff;
-  padding: 10px 15px;
-  margin-bottom: 10px;
+.todo-container {
+  background-color: #f5f5f5;
+  padding: 1rem;
+  margin: 2rem;
+  width: 90%;
+  height: 90%;
+  overflow-y: auto;
   border-radius: 5px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
-.task:hover {
-  box-shadow: 0 14px 28px rgba(0, 0, 0, 0.25), 0 10px 10px rgba(0, 0, 0, 0.22);
-}
-
-.task-content {
-  display: inline-block;
-  margin-right: 10px;
-}
-
-.task-time {
-  font-size: 12px;
-  color: #888;
-  margin-left: 5px;
-}
-
-.complete-btn,
-.delete-btn {
-  position: absolute;
-  right: 0;
-  display: none;
-  background-color: transparent;
-  border: none;
-  outline: none;
-  cursor: pointer;
-  font-size: 14px;
-  padding: 2px 10px;
-  transition: background-color 0.3s ease;
-  margin-right:3%;
-}
-
-.complete-btn {
-  right: 60px;
-  color:mediumaquamarine;
-}
-
-.delete-btn {
-  color:firebrick;
-}
-
-.complete-btn:hover,
-.delete-btn:hover {
-  background-color: rgba(0, 0, 0, 0.1);
-}
-
-.task:hover .complete-btn,
-.task:hover .delete-btn {
-  display: inline;
+.layer {
+  margin-bottom: 1.5rem;
 }
 </style>
