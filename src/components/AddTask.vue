@@ -9,6 +9,7 @@ interface Task {
   content: string;
   duration: number;
   startingTime: string;
+  endingTime: string
 }
 
 const props = defineProps<{ tasks: Task[] }>();
@@ -24,37 +25,6 @@ const parseInput = (input: string): { duration: number; taskName: string } | nul
     taskName: match[2].trim(),
   };
 };
-
-/* const addTask = () => {
-  const parsedInput = parseInput(newTask.value);
-  if (!parsedInput) {
-    window.alert("输入的任务格式错误，请重新输入");
-    return;
-  }
-
-  const { duration, taskName } = parsedInput;
-
-  if (duration < 5) {
-    window.alert("任务时长需至少5分钟");
-    return;
-  }
-
-  if (!isNaN(Number(taskName))) {
-    window.alert("任务名字不能仅包含数字");
-    return;
-  }
-
-  if (taskName) {
-    const taskId = Date.now();
-    tasks.push({
-      id: taskId,
-      content: taskName,
-      duration,
-      startingTime: dayjs().format("HH:mm A"),
-    });
-    newTask.value = "";
-  }
-}; */
 
 const addTask = () => {
   const parsedInput = parseInput(newTask.value);
@@ -82,15 +52,12 @@ const addTask = () => {
       .add(duration, "minute")
       .format("hh:mm A");
 
-    window.alert(
-      `Starting Time: ${startingTime}\nEnding Time: ${endingTime}\nDuration: ${duration}min`
-    );
-
     tasks.push({
       id: taskId,
       content: taskName,
       duration,
       startingTime,
+      endingTime
     });
     newTask.value = "";
   }
