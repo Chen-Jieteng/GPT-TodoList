@@ -74,13 +74,15 @@ const formatDuration = (duration: number) => `${duration}min`;
 }
 
 .completed-tasks {
-  background-color:antiquewhite;
+  background-color: lightgreen;
   padding: 1rem;
   border-radius: 5px;
-  transition: transform 0.3s ease;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.completed-tasks:hover {
-  transform: translateY(-1rem);
+.completed-tasks {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
 }
+
 </style>
