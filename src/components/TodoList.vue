@@ -1,7 +1,7 @@
 <script setup lang="ts">
-
 import { ref } from "vue";
 
+import Expandable from "./Expandable.vue";
 import Day from "./Day.vue";
 import AddTask from "./AddTask.vue";
 import DailySchedule from "./DailySchedule.vue";
@@ -16,32 +16,52 @@ import DailyImprovement from "./DailyImprovement.vue";
 const tasks = ref([]);
 const completedTasks = ref([]);
 
+const redoTask = (index: number) => {
+  tasks.value.push(completedTasks.value[index]);
+  completedTasks.value.splice(index, 1);
+};
 </script>
 
 <template>
-  <div class="todo-container">
-    <div class="layer layer-1">
-      <Day /><AddTask :tasks="tasks"/>
+    <div class="todo-container">
+      <div class="layer layer-1">
+        <Day /><AddTask :tasks="tasks" />
+      </div>
+      <div class="layer layer-2">
+        <Expandable>
+          <DailySchedule :tasks="tasks" :completedTasks="completedTasks" />
+        </Expandable>
+      </div>
+      <div class="layer layer-3">
+        <Expandable>
+          <completed-task-list :completed-tasks="completedTasks" @redo="redoTask" />
+        </Expandable>
+        <Expandable>
+          <IncompletedTaskList />
+        </Expandable>
+        <Expandable>
+          <ReasonIncomplete />
+        </Expandable>
+      </div>
+      <div class="layer layer-4">
+        <Expandable>
+          <DailyResult />
+        </Expandable>
+        <Expandable>
+          <DailyThought />
+        </Expandable>
+        <Expandable>
+          <DailyRevoke />
+        </Expandable>
+      </div>
+      <div class="layer layer-5">
+        <Expandable>
+          <DailyImprovement />
+        </Expandable>
+      </div>
     </div>
-    <div class="layer layer-2">
-      <DailySchedule :tasks="tasks" :completedTasks="completedTasks" />
-    </div>
-    <div class="layer layer-3">
-      <CompletedTaskList :completedTasks="completedTasks" />
-      <IncompletedTaskList />
-      <ReasonIncomplete />
-    </div>
-    <div class="layer layer-4">
-      <DailyResult />
-      <DailyThought />
-      <DailyRevoke />
-    </div>
-    <div class="layer layer-5">
-      <DailyImprovement />
-    </div>
-  </div>
 </template>
-
+  
 <style scoped>
 .todo-container {
   background-color: #f5f5f5;
@@ -49,12 +69,23 @@ const completedTasks = ref([]);
   margin: 2rem;
   width: 90%;
   height: 90%;
-  overflow-y: auto;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
+  gap: 1.5rem;
   border-radius: 5px;
+  overflow-y: auto;
 }
 
 .layer {
-  margin-bottom: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.layer > * {
+  flex: 1;
+  min-width: calc(50% - 1rem);
 }
 </style>
 
