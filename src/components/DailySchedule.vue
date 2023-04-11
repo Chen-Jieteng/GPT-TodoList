@@ -105,4 +105,16 @@ const formatDuration = (duration: number) => `${duration}min`;
 .task:hover .delete-btn {
   display: inline;
 }
+
+.daily-schedule {
+  background-color: lightgreen;
+  padding: 1rem;
+  border-radius: 5px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.daily-schedule:hover {
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0px 10px 15px rgba(0, 0, 0, 0.1);
+}
 </style>
