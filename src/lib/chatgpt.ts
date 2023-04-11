@@ -1,4 +1,4 @@
-import type { ChatMessage } from "@/types";
+// import type { ChatMessage } from "@/type";
 
 const chat = async (messageList: ChatMessage[]) => {
   const request = {
