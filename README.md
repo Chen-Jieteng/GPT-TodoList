@@ -11,16 +11,23 @@ GPT-TodoList is a web application that combines a TodoList and daily scheduler w
 
 ## Features
 
-- Left side: TodoList and daily scheduler
-  - Add, edit, and delete tasks
-  - Organize tasks by completion status and reasons for incompletion
-  - Reflect on daily achievements, ideas, and thought-provoking quotes
+- Left side: TodoList & Daily Schedule
+  - Add, edit, delete tasks
+  - Three methods for adding tasks
+  - Drag tasks to adjust order & update times
+  - Organize tasks by completion status
+  - Reflect on achievements, thoughts & quotes
   - Record improvement suggestions
-  - Scrollable layers for a better user experience
+  - Expandable & rearrangeable widgets
+  - Daily reviews with multiple segments
+  - Custom Pomodoro time & modes (relaxed/focused)
+  - Time module updates for international tasks
 
-- Right side: ChatGPT-3.5
-  - Engage in conversations with GPT-3.5
-  - Get creative suggestions and insights to improve your daily planning
+- Right side: ChatGPT Widget
+  - Chat with GPT-3.5/4 (custom input API)
+  - GPT generates tasks from conversation
+  - Automatic GPT analysis for daily reviews
+  - Creative suggestions & insights to improve planning
 
 ## Installation
 1. Clone the repository:
