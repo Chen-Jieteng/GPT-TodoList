@@ -2,6 +2,8 @@
 
 GPT-TodoList is a web application that combines a TodoList and daily scheduler with ChatGPT-3.5. Manage your tasks effectively and get creative insights from GPT-3.5 while planning your day. 
 
+The program lanaguage will be Simplified Chinese, but I'll also release multi-lang options at the end.
+
 - [中文](./zh/README.md)
 - [English](./README.md)
 - [日本語](./jp/README.md)
