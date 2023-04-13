@@ -13,10 +13,23 @@ import DailyThought from "./DailyThought.vue";
 import DailyRevoke from "./DailyRevoke.vue";
 import DailyImprovement from "./DailyImprovement.vue";
 
-const tasks = ref([]);
-const completedTasks = ref([]);
+const tasks = ref<Task[]>([]);
+const completedTasks = ref<Task[]>([]);
 
-const redoTask = (index: number) => {
+const onTaskAdded = (task: Task) => {
+  tasks.value.push(task);
+};
+
+const onTaskCompleted = (index: number) => {
+  completedTasks.value.push(tasks.value[index]);
+  tasks.value.splice(index, 1);
+};
+
+const onTaskDeleted = (index: number) => {
+  tasks.value.splice(index, 1);
+};
+
+const onTaskRedo = (index: number) => {
   tasks.value.push(completedTasks.value[index]);
   completedTasks.value.splice(index, 1);
 };
@@ -25,16 +38,16 @@ const redoTask = (index: number) => {
 <template>
     <div class="todo-container">
       <div class="layer layer-1">
-        <Day /><AddTask :tasks="tasks" />
+         <Day /><AddTask :tasks="tasks" @task-added="onTaskAdded" />
       </div>
       <div class="layer layer-2">
         <Expandable>
-          <DailySchedule :tasks="tasks" :completedTasks="completedTasks" />
+          <DailySchedule :tasks="tasks" :completedTasks="completedTasks" @complete="onTaskCompleted" @delete="onTaskDeleted" />
         </Expandable>
       </div>
       <div class="layer layer-3">
         <Expandable>
-          <completed-task-list :completed-tasks="completedTasks" @redo="redoTask" />
+          <CompletedTaskList :completedTasks="completedTasks" @redo="onTaskRedo" /><CompletedTaskList :completedTasks="completedTasks" @redo="onTaskRedo" />
         </Expandable>
         <Expandable>
           <IncompletedTaskList />
