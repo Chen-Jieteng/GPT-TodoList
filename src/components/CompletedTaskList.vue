@@ -1,12 +1,15 @@
 <script setup lang="ts">
-  import { defineProps } from "vue";
+  import { defineProps, defineEmits } from "vue";
   import type { Task } from "../types/task";
+  const emit = defineEmits(["redo"]);
 
   const props = defineProps<{ completedTasks: Task[] }>();
   const completedTasks = props.completedTasks;
 
   const redoTask = (index: number) => {
     completedTasks.splice(index, 1);
+    completedTasks.splice(index, 1);
+    emit("redo", taskToRedo);
   };
 
   const formatDuration = (duration: number) => `${duration}min`;
