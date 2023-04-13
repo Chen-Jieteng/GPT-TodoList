@@ -1,19 +1,15 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
+  import { defineProps } from "vue";
+  import type { Task } from "../types/task";
 
-interface Task {
-  id: number;
-  content: string;
-  duration: number;
-  startingTime: string;
-  endingTime: string;
-}
+  const props = defineProps<{ completedTasks: Task[] }>();
+  const completedTasks = props.completedTasks;
 
-const props = defineProps<{ completedTasks: Task[] }>();
-const completedTasks = props.completedTasks;
+  const redoTask = (index: number) => {
+    completedTasks.splice(index, 1);
+  };
 
-const formatDuration = (duration: number) => `${duration}min`;
-
+  const formatDuration = (duration: number) => `${duration}min`;
 </script>
 
 <template>
@@ -26,8 +22,7 @@ const formatDuration = (duration: number) => `${duration}min`;
             <span class="task-duration">{{ formatDuration(task.duration) }}</span>
             <span class="task-time">结束: {{ task.endingTime }}</span>
           </div>
-          <button class="redo-btn" @click="$emit('redo', index)">重做</button>
-        </li>
+          <button class="redo-btn" @click="redoTask(index)">恢复任务</button>        </li>
       </ul>
     </div>
 </template>
