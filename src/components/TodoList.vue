@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref, reactive, watch } from 'vue';
 
 import Expandable from "./Expandable.vue";
 import Day from "./Day.vue";
@@ -13,8 +13,16 @@ import DailyThought from "./DailyThought.vue";
 import DailyRevoke from "./DailyRevoke.vue";
 import DailyImprovement from "./DailyImprovement.vue";
 
-const tasks = ref<Task[]>([]);
-const completedTasks = ref<Task[]>([]);
+const tasks = ref<Task[]>(JSON.parse(localStorage.getItem('tasks') || '[]'));
+const completedTasks = ref<Task[]>(JSON.parse(localStorage.getItem('completedTasks') || '[]'));
+
+watch(tasks, () => {
+  localStorage.setItem('tasks', JSON.stringify(tasks.value));
+}, { deep: true });
+
+watch(completedTasks, () => {
+  localStorage.setItem('completedTasks', JSON.stringify(completedTasks.value));
+}, { deep: true });
 
 const onTaskAdded = (task: Task) => {
   tasks.value.push(task);
