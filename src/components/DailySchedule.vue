@@ -1,28 +1,28 @@
 <script setup lang="ts">
-import { defineProps } from "vue";
+  import { defineProps } from "vue";
 
-interface Task {
-  id: number;
-  content: string;
-  duration: number;
-  startingTime: string;
-  endingTime: string
-}
+  interface Task {
+    id: number;
+    content: string;
+    duration: number;
+    startingTime: string;
+    endingTime: string
+  }
 
-const props = defineProps<{ tasks: Task[]; completedTasks: Task[] }>();
-const tasks = props.tasks;
-const completedTasks = props.completedTasks;
+  const props = defineProps<{ tasks: Task[]; completedTasks: Task[] }>();
+  const tasks = props.tasks;
+  const completedTasks = props.completedTasks;
 
-function deleteTask(index: number) {
-  tasks.splice(index, 1);
-}
+  const completeTask = (index: number) => {
+    completedTasks.push(tasks[index]);
+    tasks.splice(index, 1);
+  };
 
-const completeTask = (index: number) => {
-  completedTasks.push(tasks[index]);
-  tasks.splice(index, 1);
-};
+  const deleteTask = (index: number) => {
+    tasks.splice(index, 1);
+  };
 
-const formatDuration = (duration: number) => `${duration}min`;
+  const formatDuration = (duration: number) => `${duration}min`;
 </script>
 
 <template>
