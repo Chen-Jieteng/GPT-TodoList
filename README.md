@@ -9,7 +9,7 @@ The program lanaguage will be Simplified Chinese, but I'll also release multi-la
 - [日本語](./jp/README.md)
 
 ## Updates: 
-- Planning to complete the project before 2023/4/30, It's late but I need to prepare for final exams and graduation first.
+- Planning to complete the project before 2023/5/20, It's late but I need to prepare for final exams and graduation first.
 
 ## Features
 
