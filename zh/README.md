@@ -6,6 +6,9 @@ GPT-TodoList是一款结合了TodoList和每日日程安排的Web应用程序，
 - [中文](./zh/README.md)
 - [English](./README.md)
 - [日本語](./jp/README.md)
+## 简单flowchart
+![gpt drawio](https://user-images.githubusercontent.com/77313997/236971290-f90bc8bd-1606-4511-b190-e346c1a1d018.png)
+
 
 ## 主要功能
 
