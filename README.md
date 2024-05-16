@@ -9,7 +9,7 @@ The program lanaguage will be Simplified Chinese, but I'll also release multi-la
 - [日本語](./jp/README.md)
 
 ## Updates: 
-- 2024/5/16 Now I'm going to restart the whole project, the code here is incomplete snippet because of privacy I did not share the whole code, I'll post it once i'm done with the space project of GPT-4o in HuggingFace. The objective is to embeded GPT-4o in django environment. In the meantime, the todoList will also suport ERNIE Bot, Tongyi Qianwen, etc, and the only easy work is to replace the api-key. 
+- 2024/5/16 Now I'm going to restart the whole project, the code here is incomplete snippet because of privacy I did not share the whole code, I'll post it once i'm done with the space project of GPT-4o in HuggingFace. The objective is to embeded GPT-4o in django environment instead of Vue or React anymore. The reason is my Vue is not mature enough. In the meantime, the todoList will also suport ERNIE Bot, Tongyi Qianwen, etc, and the only easy work is to replace the api-key. 
    
 ## Features
 
